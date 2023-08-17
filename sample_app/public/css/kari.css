@@ -1,0 +1,32 @@
+/* 共通 */
+section {
+  width: 100%;
+  padding: 5%;
+  border-bottom: solid;
+  border-bottom-width: 1px;
+}
+.center {
+  text-align: center;
+}
+/* セクション1 */
+
+#section1 div{
+  display: flex;
+}
+/* セクション2 */
+#section_2 {
+  width: 100%;
+  padding-bottom: 0;
+  border-bottom: solid;
+  border-bottom-width: 1px;
+}
+#more {
+  text-align: right;
+  margin-right: 5%;
+  margin-bottom: 0;
+}
+/* セクション3 */
+#section_3 p {
+  margin: 0;
+  text-align: center;
+}

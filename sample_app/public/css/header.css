@@ -1,0 +1,98 @@
+body, h1, h2, h3, h4, h5, h6, p, address, ul, ol, li, dl, dt, dd, img, form, table, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 100%;
+  text-align: left;
+  list-style-type: none;
+  border-collapse: collapse;
+}
+
+
+header {
+  display: flex;
+  position: relative;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-color:#333;
+  flex-direction: column;
+}
+.center {
+  text-align: center;
+}
+
+header h1 {
+  color: white;
+  font-size: 48px;
+}
+
+#menu {
+  color: white;
+}
+.hamburger {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  z-index: 3;
+  vertical-align: middle;
+  margin: 0 0 0 auto;
+}
+.hamburger .bar{
+  position: absolute;
+  width: 2rem;
+  height: 2px;
+  display: block;
+  background: #2da690;
+  transition: 0.1s;
+  box-sizing: border-box;
+}
+.hamburger .bar-top {
+  top: 10px;
+}
+.hamburger .bar-middle {
+  line-height: 1.5rem;
+  top: 48%;
+}
+.hamburger .bar-bottom {
+  bottom: 10px;
+}
+.hamburger.close .bar-top{
+  transform: rotate(45deg);
+  top: 48%;
+}
+.hamburger.close .bar-middle{
+  display: none;
+}
+.hamburger.close .bar-bottom{
+  transform: rotate(-45deg);
+  bottom: 48%;
+}	
+.nav-02 {
+  display: none;
+  position: fixed;
+  background-color: white;
+  opacity: 0.8;
+  padding-top: 7.5rem;
+  padding-left: 32px;
+  padding-right: 32px;
+  z-index: 1;
+  transition:0.7s;
+}
+.nav-02-active {
+  display: block;
+  right: 0;
+}
+
+#menu_box {
+  z-index: 999;
+  margin-top: 50vh;
+  opacity: 0;
+  width: 40%;
+  background-color: white;
+  border-radius: 12px;
+}
+
+

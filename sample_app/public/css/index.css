@@ -1,0 +1,104 @@
+
+/* 共通 */
+body {
+  width: 100%;
+
+}
+tbody {
+  width: 100%;
+  text-align: center;
+}
+section {
+  
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 36px;
+  /* border-bottom: solid;
+  border-bottom-width: 1px; */
+}
+.center {
+  text-align: center;
+}
+.title {
+  font-size: 24px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-weight:bold
+}
+.under_line {
+  border-bottom: solid;
+  border-bottom-width: 1px;
+}
+.layout {
+  text-align: center;
+  /* margin-left: auto;
+  margin-right: auto; */
+  display:flex;
+  justify-content:center
+}
+
+/* セクション1 */
+#send {
+  margin: 16px;
+  font-size: 24px;
+  color: black;
+}
+#icon {
+  height: 120px;
+  width: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 16px;
+}
+#section_1 {
+    border-bottom: solid;
+  border-bottom-width: 1px;
+}
+/* セクション2 */
+#section_2 {
+  
+  padding-bottom: 0;
+  border-bottom: solid;
+  border-bottom-width: 1px;
+}
+
+.old_review {
+  padding-right: 48px;
+  padding-bottom: 18px;
+  max-width: 250px;
+  word-wrap: break-word;
+}
+
+
+#more {
+  text-align: right;
+  margin-right: 5%;
+  margin-bottom: 0;
+}
+/* セクション3 */
+.calender {
+  margin: auto;
+  text-align: center;
+  
+  width: 80%;
+}
+.week {
+  width: 64px;
+  height: 64px;
+
+  padding-top: 16px;
+  padding-bottom: 16px;
+  /* margin: 16px; */
+  vertical-align: top;
+  word-wrap: break-word;
+}
+table {
+  table-layout: fixed;
+  margin: auto;
+  /* margin-right: auto;
+  margin-left: auto; */
+}
+#day {
+  font-size: 24px;
+
+}
