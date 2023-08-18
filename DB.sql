@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 1111
 2222
 2222
 3333
+=======
+
+>>>>>>> master
 -- phpMyAdmin SQL Dump
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
