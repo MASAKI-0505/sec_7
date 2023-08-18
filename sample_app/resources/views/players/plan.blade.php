@@ -38,12 +38,12 @@
 
 <script>
   $(function(){
-  $("#sending").on("click", function(){
-    if(confirm("登録しますか？")){
-      return true;
-    } else {
-      return false;
-    }
+    $("#sending").on("click", function(){
+      if(confirm("登録しますか？")){
+        return true;
+      } else {
+        return false;
+      }
+    });
   });
-});
 </script>
