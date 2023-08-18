@@ -36,6 +36,7 @@ class PlayerController extends Controller
         } else {
             $review = \DB::table('movies_review')
             ->where('user_id', $id)
+            ->where('display', 0)
             ->select('*', 'movies_review.id as review_id')
             ->join('movies_data', 'movies_review.movie_id', '=', 'movies_data.id')
             ->limit(3)
@@ -66,6 +67,7 @@ class PlayerController extends Controller
             } else {
                 $review = \DB::table('movies_review')
                 ->where('user_id', $user_id)
+                ->where('display', 0)
                 ->select('*', 'movies_review.id as review_id')
                 ->join('movies_data', 'movies_review.movie_id', '=', 'movies_data.id')
                 ->limit(3)
@@ -80,6 +82,7 @@ class PlayerController extends Controller
             $user_id = $add;
             $review = \DB::table('movies_review')
             ->where('user_id', $user_id)
+            ->where('display', 0)
             ->select('*', 'movies_review.id as review_id')
             ->join('movies_data', 'movies_review.movie_id', '=', 'movies_data.id')
             ->limit(3)
@@ -228,6 +231,7 @@ class PlayerController extends Controller
             }
 
             $review = \DB::table('movies_review')
+            ->where('display', 0)
             ->where('user_id', $id)
             ->select('*', 'movies_review.id as review_id')
             ->join('movies_data', 'movies_review.movie_id', '=', 'movies_data.id')
@@ -282,17 +286,12 @@ class PlayerController extends Controller
             ->where('user_id', $user_id)
             ->where('id', $review_id)
             ->count();
-            // echo $user_id;
-            // echo $review_id;
             if ($review_check == 0) {
                 return redirect()->route('index');
             }
             if ($data_check == 0){
                 return redirect()->route('index');
             }
-            // if ($data_check == 1) {
-            //     $user_id = $id;
-            // }
             $review = \DB::table('movies_review')
             ->where('user_id', $user_id)
             ->where('id', $review_id)
@@ -303,8 +302,8 @@ class PlayerController extends Controller
             $user_name = \DB::table('users_data')
             ->where('id', $user_id)
             ->first('name');
-        return view('Players.old_review', compact('id', 'review', 'name', 'user_name'));
-    }
+            return view('Players.old_review', compact('id', 'review', 'name', 'user_name'));
+        }
     }
     public function calendar() {
         $data = session()->all();
@@ -364,14 +363,105 @@ class PlayerController extends Controller
         }
         return view('Players.user_setting',  compact('id'));
     }
-    // public function send(Request $request)
-    // {
-    //     $name = 'テスト ユーザー';
-    //     $email = 'bvlwp05@yahoo.co.jp';
+    
+    public function post_edit(Request $request) {
+        $data = session()->all();
+        $id = 0;
+        $id = session()->get('id');
+        if ($id == 0) {
+            return redirect()->route('login');
+        } else {
+            $user_id = $request->input('user_id');
+            $review_id = $request->input('review_id');
+            $data_check = \DB::table('users_data')
+            ->where('id', $user_id)
+            ->count();
+            $review_check = \DB::table('movies_review')
+            ->where('user_id', $user_id)
+            ->where('id', $review_id)
+            ->count();
+            if ($review_check == 0) {
+                return redirect()->route('index');
+            }
+            if ($data_check == 0){
+                return redirect()->route('index');
+            }
+            $review = \DB::table('movies_review')
+            ->where('user_id', $user_id)
+            ->where('id', $review_id)
+            ->first();
+            $name = \DB::table('movies_data')
+            ->where('id', $review->movie_id)
+            ->first();
+            $user_name = \DB::table('users_data')
+            ->where('id', $user_id)
+            ->first('name');
+            return view('Players.post_edit', compact('id', 'review', 'name', 'user_name'));
+        }
+    }
 
-    //     Mail::send(new TestMail($name, $email));
+    public function post_edit_complete(Request $request) {
+        $id = 0;
+        $review_id = $request->input('review_id');
+        $id = session()->get('id');
+        if ($id == 0) {
+            return redirect()->route('login');
+        } else {
+            
+            $data = $request->all();
+            if (empty($data["story"])) {
+                $data["story"] = "";
+            }
+            if (empty($data["impression"])) {
+                $data["impression"] = "";
+            }
 
-    //     return view('index');
-        
-    // }
+            $data_check = \DB::table('movies_data')
+            ->where('title', $data["title"])
+            ->count();
+            if ($data_check == 0) {
+                \DB::table('movies_data')->insert([
+                    'title' => $data['title'],
+                ]);
+            }
+            $movie_id = \DB::table('movies_data')
+            ->where('title', $data["title"])
+            ->first();
+            \DB::table('movies_review')
+                ->where('id', $review_id)
+                ->update([
+                'day' => $data['day'],
+                'user_id' => $id,
+                'movie_id' => $movie_id->id,
+                'category' => $data['category'],
+                'age' => $data['age'],
+                'evaluation' => $data['evaluation'],
+                'story' => $data['story'],
+                'impression' => $data['impression'],
+                'created_at' => now(),
+            ]);
+
+            return redirect()->route('index');
+
+
+            
+            
+        }
+    }
+
+    public function post_delete(Request $request) {
+        $review_id = $request->input('review_id');
+        $id = 0;
+        $id = session()->get('id');
+        if ($id == 0) {
+            return redirect()->route('login');
+        } else {
+            \DB::table('movies_review')
+            ->where('id', $review_id)
+            ->update([
+                'display' => 1
+            ]);
+            return redirect()->route('index');
+        }
+    }
 }

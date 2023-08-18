@@ -26,7 +26,10 @@
     <th class="old_review">評価</th>
     <th class="old_review">あらすじ</th>
     <th class="old_review">感想</th>
-    <th class="old_review">投稿日時</th>
+    @if ( $id == $name->id)
+    <th class="old_review">編集</th>
+    <th class="old_review">削除</th>
+    @endif
   </tr>
   @foreach($review as $column)
   <tr>
@@ -35,9 +38,12 @@
     <td class="old_review">{{ $column->category }}</td>
     <td class="old_review">{{ $column->age }}</td>
     <td class="old_review">{{ $column->evaluation }}</td>
-    <td class="old_review">{{ nl2br($column->story) }}</td>
-    <td class="old_review">{{ nl2br($column->impression) }}</td>
-    <td class="old_review">{{ $column->created_at }}</td>
+    <td class="old_review">{!! nl2br($column->story) !!}</td>
+    <td class="old_review">{!! nl2br($column->impression) !!}</td>
+    @if ( $id == $name->id)
+    <td class="old_review"><a href="/post_edit?user_id={{ $name->id }}&review_id={{ $column->review_id }}">編集</a></td>
+    <td class="old_review" id="delete"><a href="/post_delete?review_id={{ $column->review_id }}">削除</a></td>
+    @endif
   </tr>
 
     @endforeach
@@ -53,4 +59,13 @@
 </html>
 
 <script>
+  $(function(){
+    $("#delete").on("click", function(){
+      if(confirm("削除しますか？")){
+        return true;
+      } else {
+        return false;
+      }
+    });
+  });
 </script>
