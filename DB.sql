@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-1111
-2222
-2222
-3333
-=======
-
->>>>>>> master
 -- phpMyAdmin SQL Dump
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2023-08-17 10:16:49
+-- 生成日時: 2023-08-18 06:37:55
 -- サーバのバージョン： 10.4.27-MariaDB
 -- PHP のバージョン: 7.4.33
 
@@ -69,7 +61,9 @@ CREATE TABLE `movies_data` (
 INSERT INTO `movies_data` (`id`, `title`) VALUES
 (35, '仮面ライダー'),
 (36, 'ウルトラマン'),
-(37, 'ワンピース');
+(37, 'ワンピース'),
+(38, 'アンパンマン'),
+(39, 'マスク');
 
 -- --------------------------------------------------------
 
@@ -87,17 +81,20 @@ CREATE TABLE `movies_review` (
   `evaluation` int(32) NOT NULL,
   `story` varchar(512) NOT NULL,
   `impression` varchar(512) NOT NULL,
-  `created_at` datetime NOT NULL
+  `created_at` datetime NOT NULL,
+  `display` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- テーブルのデータのダンプ `movies_review`
 --
 
-INSERT INTO `movies_review` (`id`, `user_id`, `day`, `movie_id`, `category`, `age`, `evaluation`, `story`, `impression`, `created_at`) VALUES
-(35, 14, '2023-08-23', 35, 'アクション映画', '1950 年代', 1, '仮面ライダー', 'おもしろい', '2023-08-17 08:11:58'),
-(36, 14, '2023-08-22', 36, 'アクション映画', '1950 年代', 1, '・・・', '楽しい', '2023-08-17 08:12:32'),
-(37, 15, '2023-08-22', 37, 'アクション映画', '1950 年代', 1, '・・・・・', '面白かった。', '2023-08-17 08:14:19');
+INSERT INTO `movies_review` (`id`, `user_id`, `day`, `movie_id`, `category`, `age`, `evaluation`, `story`, `impression`, `created_at`, `display`) VALUES
+(35, 14, '2023-08-22', 36, 'アクション映画', '1950 年代', 1, '・・・・・', '楽しい', '2023-08-18 02:13:05', 0),
+(36, 14, '2023-08-22', 36, 'アクション映画', '1950 年代', 1, '・・///', '楽しい', '2023-08-18 02:13:45', 0),
+(37, 14, '2023-08-22', 35, 'アクション映画', '1950 年代', 1, '仮面ライダー', '楽しい', '2023-08-18 02:15:09', 0),
+(38, 14, '2023-08-22', 36, 'アクション映画', '1950 年代', 1, '・・・aaa', '楽しい', '2023-08-18 01:55:09', 0),
+(39, 15, NULL, 39, 'アクション映画', '1950 年代', 1, '面白い??', '面白かった', '2023-08-18 02:00:25', 0);
 
 -- --------------------------------------------------------
 
@@ -212,13 +209,13 @@ ALTER TABLE `friends`
 -- テーブルの AUTO_INCREMENT `movies_data`
 --
 ALTER TABLE `movies_data`
-  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- テーブルの AUTO_INCREMENT `movies_review`
 --
 ALTER TABLE `movies_review`
-  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- テーブルの AUTO_INCREMENT `password_resets`
